@@ -3,14 +3,13 @@ package be.vdab.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import be.vdab.dao.FiliaalDAO;
 import be.vdab.entities.Filiaal;
 import be.vdab.exceptions.FiliaalHeeftNogWerknemersException;
 import be.vdab.valueobjects.PostcodeReeks;
 
-@Service
+@ReadOnlyTransactionalService
 class FiliaalServiceImpl implements FiliaalService {
 	private final FiliaalDAO filiaalDAO;
 
@@ -18,8 +17,9 @@ class FiliaalServiceImpl implements FiliaalService {
 	FiliaalServiceImpl(FiliaalDAO filiaalDAO) {
 		this.filiaalDAO = filiaalDAO;
 	}
-
+	
 	@Override
+	@ModifyingTransactionalServiceMethod
 	public void create(Filiaal filiaal) {
 		filiaalDAO.create(filiaal);
 	}
@@ -30,11 +30,13 @@ class FiliaalServiceImpl implements FiliaalService {
 	}
 
 	@Override
+	@ModifyingTransactionalServiceMethod
 	public void update(Filiaal filiaal) {
 		filiaalDAO.update(filiaal);
 	}
 
 	@Override
+	@ModifyingTransactionalServiceMethod
 	public void delete(long id) {
 		if (filiaalDAO.findAantalWerknemers(id) != 0) {
 			throw new FiliaalHeeftNogWerknemersException();
