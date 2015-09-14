@@ -3,6 +3,7 @@ package be.vdab.entities;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -32,7 +33,8 @@ public class Werknemer implements Serializable {
 	private Filiaal filiaal;
 
 	private BigDecimal wedde;
-
+	
+	@Column(unique = true)
 	private long rijksregisterNr;
 	// je maakt getters voor de niet-static private variabelen
 	// je maakt met het Eclipse menu Source, Generate hashcode() and equals()

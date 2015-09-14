@@ -82,6 +82,10 @@ public class Filiaal implements Serializable {
 		this(naam, hoofdFiliaal, waardeGebouw, inGebruikName, adres);
 		this.id = id;
 	}
+	
+	public void afschrijven(){
+		this.waardeGebouw = BigDecimal.ZERO;
+	}
 
 	public long getId() {
 		return id;
