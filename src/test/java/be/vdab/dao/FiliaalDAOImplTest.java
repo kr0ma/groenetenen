@@ -28,7 +28,7 @@ public class FiliaalDAOImplTest {
 	public void create() {
 		Filiaal filiaal = new Filiaal("TestNaam", true, BigDecimal.ONE, new Date(),
 				new Adres("Straat", "HuisNr", 1000, "Gemeente"));
-		filiaalDAO.create(filiaal);
+		filiaalDAO.save(filiaal);
 		assertNotEquals(0, filiaal.getId()); // id moet autonumber hebben:
 	}
 }
