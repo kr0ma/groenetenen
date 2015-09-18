@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import be.vdab.restclients.KoersenClient;
 
 @Service
-public class EuroServiceImpl implements EuroService {
+class EuroServiceImpl implements EuroService {
 	private final KoersenClient koersenClient;
 
 	@Autowired
