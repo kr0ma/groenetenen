@@ -49,6 +49,13 @@ class FiliaalController {
 		this.filiaalService = filiaalService;
 	}
 
+	private static final String PER_ID_VIEW = "filialen/perid";
+
+	@RequestMapping(path = "perid", method = RequestMethod.GET)
+	String findById() {
+		return PER_ID_VIEW;
+	}
+
 	@RequestMapping(method = RequestMethod.GET)
 	ModelAndView findAll() {
 		return new ModelAndView(FILIALEN_VIEW, "filialen", filiaalService.findAll()).addObject("aantalFilialen",
@@ -166,7 +173,8 @@ class FiliaalController {
 
 	@RequestMapping(path = "afschrijven", method = RequestMethod.POST)
 	ModelAndView afschrijven(@Valid AfschrijvenForm afschrijvenForm, BindingResult bindingResult) {
-		if (bindingResult.hasErrors()) { // als de gebruiker geen filiaal selecteerde
+		if (bindingResult.hasErrors()) { // als de gebruiker geen filiaal
+											// selecteerde
 			return new ModelAndView(AFSCHRIJVEN_VIEW, "filialen", filiaalService.findNietAfgeschreven());
 		}
 		filiaalService.afschrijven(afschrijvenForm.getFilialen());
