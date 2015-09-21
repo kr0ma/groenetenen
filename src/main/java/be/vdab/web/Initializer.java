@@ -12,6 +12,7 @@ import be.vdab.datasource.CreateDataSourceBean;
 import be.vdab.mail.CreateMailBeans;
 import be.vdab.restclients.CreateRestClientBeans;
 import be.vdab.restservices.CreateRestControllerBeans;
+import be.vdab.security.CreateSecurityFilter;
 import be.vdab.services.CreateServiceBeans;
 
 public class Initializer extends AbstractAnnotationConfigDispatcherServletInitializer {
@@ -22,7 +23,8 @@ public class Initializer extends AbstractAnnotationConfigDispatcherServletInitia
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return new Class<?>[] { CreateDataSourceBean.class, CreateDAOBeans.class, CreateServiceBeans.class, CreateRestClientBeans.class, CreateMailBeans.class };
+		return new Class<?>[] { CreateDataSourceBean.class, CreateDAOBeans.class, CreateServiceBeans.class,
+				CreateRestClientBeans.class, CreateMailBeans.class, CreateSecurityFilter.class };
 	}
 
 	@Override
@@ -34,7 +36,7 @@ public class Initializer extends AbstractAnnotationConfigDispatcherServletInitia
 	protected Filter[] getServletFilters() {
 		CharacterEncodingFilter utf8Filter = new CharacterEncodingFilter();
 		utf8Filter.setEncoding("UTF-8");
-		return new Filter[] { utf8Filter, new OpenEntityManagerInViewFilter() };
+		return new Filter[] { new OpenEntityManagerInViewFilter() };
 	}
 
 	@Override
