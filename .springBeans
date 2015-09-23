@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beansProjectDescription>
+	<version>1</version>
+	<pluginVersion><![CDATA[3.7.0.201506251244-RELEASE]]></pluginVersion>
+	<configSuffixes>
+		<configSuffix><![CDATA[xml]]></configSuffix>
+	</configSuffixes>
+	<enableImports><![CDATA[false]]></enableImports>
+	<configs>
+		<config>java:be.vdab.web.CreateControllerBeans</config>
+		<config>java:be.vdab.dao.CreateDAOBeans</config>
+		<config>java:be.vdab.datasource.CreateDataSourceBean</config>
+		<config>java:be.vdab.mail.CreateMailBeans</config>
+		<config>java:be.vdab.restclients.CreateRestClientBeans</config>
+		<config>java:be.vdab.restservices.CreateRestControllerBeans</config>
+		<config>java:be.vdab.services.CreateServiceBeans</config>
+		<config>java:be.vdab.mail.MailSenderImpl</config>
+		<config>java:be.vdab.web.VoorkeurImpl</config>
+		<config>java:be.vdab.restclients.YahooKoersenClient</config>
+	</configs>
+	<autoconfigs>
+	</autoconfigs>
+	<configSets>
+	</configSets>
+</beansProjectDescription>

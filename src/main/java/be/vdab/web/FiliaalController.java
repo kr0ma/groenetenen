@@ -2,6 +2,7 @@ package be.vdab.web;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,11 +69,11 @@ class FiliaalController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String create(@Valid Filiaal filiaal, BindingResult bindingResult) {
+	public String create(@Valid Filiaal filiaal, BindingResult bindingResult, HttpServletRequest request) {
 		if (bindingResult.hasErrors()) {
 			return TOEVOEGEN_VIEW;
 		}
-		filiaalService.create(filiaal);
+		filiaalService.create(filiaal, request.getRequestURL().toString());
 		return REDIRECT_URL_NA_TOEVOEGEN;
 	}
 
@@ -148,7 +149,7 @@ class FiliaalController {
 		return modelAndView;
 	}
 
-	@RequestMapping(path = "{filiaal}}/wijzigen", method = RequestMethod.GET)
+	@RequestMapping(path = "{filiaal}/wijzigen", method = RequestMethod.GET)
 	ModelAndView updateForm(@PathVariable Filiaal filiaal) {
 		if (filiaal == null) {
 			return new ModelAndView(REDIRECT_URL_FILIAAL_NIET_GEVONDEN);
