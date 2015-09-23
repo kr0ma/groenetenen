@@ -62,5 +62,6 @@ public class CreateSecurityFilter extends WebSecurityConfigurerAdapter {
 				.permitAll()
 				.antMatchers("/**").authenticated().and().exceptionHandling()
 				.accessDeniedPage("/WEB-INF/JSP/forbidden.jsp");
+		http.httpBasic();
 	}
 }
