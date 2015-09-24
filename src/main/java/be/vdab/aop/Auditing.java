@@ -8,17 +8,20 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
+@Order(2)
 class Auditing {
 	private final static Logger logger = Logger.getLogger(Auditing.class.getName());
 
 	// before advice point
-	@Before("execution(* be.vdab.services.*.*(..))")
+	
+	@Before("be.vdab.aop.PointcutExpressions.services()")
 	void schrijfAuditBefore(JoinPoint joinPoint) {
 		StringBuilder builder = new StringBuilder("\nTijdstip\t").append(new Date());
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -29,13 +32,22 @@ class Auditing {
 		for (Object object : joinPoint.getArgs()) {
 			builder.append("\nParameter\t").append(object);
 		}
-		logger.info(builder.toString());
+		logger.info(builder.toString() + "BEFORE");
 	}
+	
 
 	// after returning advice point (no exceptions)
-	@AfterReturning(pointcut = "execution(* be.vdab.services.*.*(..))", returning = "returnValue")
+	@AfterReturning(pointcut = "be.vdab.aop.PointcutExpressions.services()", returning = "returnValue")
 	void schrijfAuditAfter(JoinPoint joinPoint, Object returnValue) {
 		StringBuilder builder = new StringBuilder("\nTijdstip\t").append(new Date());
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (authentication != null && !"anonymousUser".equals(authentication.getName())) {
+			builder.append("\nGebruiker\t").append(authentication.getName());
+		}
+		builder.append("\nMethod\t\t").append(joinPoint.getSignature().toLongString());
+		for (Object object : joinPoint.getArgs()) {
+			builder.append("\nParameter\t").append(object);
+		}
 		if (returnValue != null) {
 			builder.append("\nReturn\t\t");
 			if (returnValue instanceof Collection) {
