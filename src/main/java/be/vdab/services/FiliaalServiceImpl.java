@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.access.prepost.PreAuthorize;
 
@@ -56,6 +57,7 @@ class FiliaalServiceImpl implements FiliaalService {
 	}
 
 	@Override
+	@Cacheable(cacheNames="filialen")
 	public List<Filiaal> findAll() {
 		return filiaalDAO.findAll(new Sort("naam"));
 	}
