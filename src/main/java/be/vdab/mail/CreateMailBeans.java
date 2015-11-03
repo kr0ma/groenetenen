@@ -17,13 +17,13 @@ import org.springframework.scheduling.annotation.EnableAsync;
 public class CreateMailBeans {
 
 	@Bean
-	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+	static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
 		return new PropertySourcesPlaceholderConfigurer();
 	}
 
 	@Bean
 	@Autowired
-	public JavaMailSenderImpl javaMailSenderImpl(@Value("${mailserver.host}") String host,
+	JavaMailSenderImpl javaMailSenderImpl(@Value("${mailserver.host}") String host,
 			@Value("${mailserver.port}") int port, @Value("${mailserver.protocol}") String protocol,
 			@Value("${mailserver.username}") String username, @Value("${mailserver.password}") String password) {
 		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();

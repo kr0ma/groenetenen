@@ -15,13 +15,13 @@ import org.springframework.stereotype.Component;
 import be.vdab.entities.Filiaal;
 
 @Component
-public class MailSenderImpl implements MailSender {
+class MailSenderImpl implements MailSender {
 	private final static Logger logger = Logger.getLogger(MailSenderImpl.class.getName());
 	private final JavaMailSender sender;
 	private final String webmaster;
 
 	@Autowired
-	public MailSenderImpl(JavaMailSender sender, @Value("${webmaster}") String webmaster) {
+	MailSenderImpl(JavaMailSender sender, @Value("${webmaster}") String webmaster) {
 		this.sender = sender;
 		this.webmaster = webmaster;
 	}
