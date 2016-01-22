@@ -1,0 +1,8 @@
+<html>
+    <body>
+        <h3>Hi</h3>
+        <div>            
+            Je kan het nieuwe filiaal <strong> ${filiaal} </strong> <a href='${urlFiliaal}/wijzigen'>hier</a> nazien
+        </div>
+    </body>
+</html>

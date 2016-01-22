@@ -1,5 +1,8 @@
 package be.vdab.mail;
 
+import java.util.Properties;
+
+import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -9,6 +12,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.ui.velocity.VelocityEngineFactoryBean;
 
 @Configuration
 @ComponentScan
@@ -33,5 +37,15 @@ public class CreateMailBeans {
 		mailSender.setUsername(username);
 		mailSender.setPassword(password);
 		return mailSender;
+	}
+
+	@Bean
+	VelocityEngineFactoryBean velocityEngineFactoryBean() {
+		VelocityEngineFactoryBean velocityEngineFactoryBean = new VelocityEngineFactoryBean();
+		Properties velocityProperties = new Properties();
+		velocityProperties.put("resource.loader", "class");
+		velocityProperties.put("class.resource.loader.class","org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
+		velocityEngineFactoryBean.setVelocityProperties(velocityProperties);
+		return velocityEngineFactoryBean;
 	}
 }
