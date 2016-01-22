@@ -2,7 +2,6 @@ package be.vdab.mail;
 
 import java.util.Properties;
 
-import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
