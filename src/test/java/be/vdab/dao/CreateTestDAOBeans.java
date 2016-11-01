@@ -10,7 +10,7 @@ public class CreateTestDAOBeans extends CreateDAOBeans {
 	@Bean
 	LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean factory = super.entityManagerFactory();
-		factory.getJpaPropertyMap().put("javax.persistence.schema-generation.database.action", "create");
+		factory.getJpaPropertyMap().put("javax.persistence.schema-generation.database.action", "drop-and-create");
 		return factory;
 	}
 }
